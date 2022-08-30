@@ -7,6 +7,7 @@ class Location(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     coordinates = db.Column(db.Float)
     description = db.Column(db.String(10000))
+    image_url = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
 
 
@@ -18,7 +19,8 @@ class Location(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'location_id': self.location_id,
+            'coordinates': self.coordinates,
             'description': self.description,
+            'image_url': self.image_url,
             'created_at': self.created_at
         }
