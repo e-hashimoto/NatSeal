@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask import Blueprint, jsonify, request
+from flask_login import login_required, current_user
+from app.models import User, db
 
 user_routes = Blueprint('users', __name__)
 
@@ -12,8 +12,28 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
-@user_routes.route('/<int:id>')
+@user_routes.route('/<int:id>/')
 @login_required
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:id>/edit/', methods=['PUT'])
+@login_required
+def edit_user(id):
+
+    user = User.query.get(id)
+    user.description = request.form.get('full_name')
+    user.username = request.form.get('username')
+
+    db.session.add(user)
+    db.session.commit()
+    return user.to_dict()
+
+@user_routes.route('/<int:id>/', methods=['DELETE'])
+@login_required
+def delete_user(id):
+    user = User.query.get(id)
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({'message': 'Your account has been removed.'})

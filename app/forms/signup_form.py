@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms.validators import DataRequired, Email, ValidationError, Length
 from app.models import User
 
 
@@ -9,7 +9,7 @@ def user_exists(form, field):
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:
-        raise ValidationError('Email address is already in use.')
+        raise ValidationError("We're sorry. That email address is already in use.")
 
 
 def username_exists(form, field):
@@ -19,9 +19,42 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username is already in use.')
 
+def username_empty(form, field):
+    # Must provide username
+    username = field.data
+    if len(username) == 0:
+        raise ValidationError('Username is required.')
+    elif len(username) > 40:
+        raise ValidationError('Username must be no more than 40 characters.')
+
+def email_validations(form, field):
+    email = field.data
+
+    if '@' not in email:
+        raise ValidationError('Email must be avalid email.')
+    if len(email) > 255:
+        raise ValidationError('Email cannot be more than 255 characters.')
+    elif len(email) == 0:
+        raise ValidationError('Please provide an email address')
+
+def email_exists(form, field):
+    email = field.data
+    existing_email = User.query.filter(User.email == email).first()
+    if existing_email:
+        raise ValidationError('Email is already in use.')
+
+def full_name_length(form, field):
+    full_name = field.data
+
+    if len(full_name) > 128:
+        raise ValidationError('Full name cannot be longer than 128 characters.')
+    if len(full_name) == 0:
+        raise ValidationError('Full name is required.')
+
 
 class SignUpForm(FlaskForm):
     username = StringField(
-        'username', validators=[DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[DataRequired()])
+        'username', validators=[DataRequired(), username_exists, user_exists, username_empty])
+    email = StringField('email', validators=[DataRequired(), user_exists, email_validations, email_exists])
+    password = StringField('password', validators=[DataRequired(), Length(min=6, max=20)])
+    # full_name =
