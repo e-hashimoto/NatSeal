@@ -1,7 +1,6 @@
 from app.models import db, Location
 
 
-# Adds a demo user, you can add other users here if you want
 def seed_locations():
     antarctica = Location(
         user_id=1, latitude=-82.8628, longitude=135.0000, description="Antarctica, the world’s southernmost and fifth largest continent. Its landmass is almost wholly covered by a vast ice sheet. Often described as a continent of superlatives, Antarctica is not only the world’s southernmost continent. It is also the world’s highest, driest, windiest, coldest, and iciest continent. Antarctica is about 5.5 million square miles (14.2 million square km) in size, and thick ice covers about 98 percent of the land. The continent is divided into East Antarctica (which is largely composed of a high ice-covered plateau) and West Antarctica (which is largely an ice sheet covering an archipelago of mountainous islands). Lying almost concentrically around the South Pole, Antarctica’s name means “opposite to the Arctic.” It would be essentially circular except for the outflaring Antarctic Peninsula, which reaches toward the southern tip of South America (some 600 miles [970 km] away), and for two principal embayments, the Ross Sea and the Weddell Sea. These deep embayments of the Southern Ocean make the continent somewhat pear-shaped, dividing it into two unequal-sized parts. East Antarctica lies mostly in the east longitudes and is larger than West Antarctica, which lies wholly in the west longitudes. East and West Antarctica are separated by the approximately 2,100-mile- (about 3,400-km-) long Transantarctic Mountains. The continental ice sheet contains approximately 7 million cubic miles (about 29 million cubic km) of ice, representing about 90 percent of the world’s ice and 80 percent of its fresh water. Its average thickness is about 5,900 feet (1,800 metres). Ice shelves, or ice sheets floating on the sea, cover many parts of the Ross and Weddell seas. These shelves—the Ross Ice Shelf and the Filchner-Ronne Ice Shelf—together with other shelves around the continental margins, fringe about 45 percent of Antarctica. Around the Antarctic coast, shelves, glaciers, and ice sheets continually “calve,” or discharge, icebergs into the seas.", image_url='https://cdn.britannica.com/42/76242-050-43A053B0/Mount-Erebus-Ross-Island-Antarctica.jpghttps://cdn.britannica.com/42/76242-050-43A053B0/Mount-Erebus-Ross-Island-Antarctica.jpg'
@@ -15,12 +14,6 @@ def seed_locations():
 
     db.session.commit()
 
-
-# Uses a raw SQL query to TRUNCATE the users table.
-# SQLAlchemy doesn't have a built in function to do this
-# TRUNCATE Removes all the data from the table, and RESET IDENTITY
-# resets the auto incrementing primary key, CASCADE deletes any
-# dependent entities
 def undo_locations():
     db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
     db.session.commit()
