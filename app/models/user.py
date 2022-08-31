@@ -9,7 +9,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    full_name = db.Column(db.String(128), nullable=False)
+    # full_name = db.Column(db.String(128), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
     # RELATIONSHIPS
@@ -34,5 +34,5 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'full_name': self.full_name
+            # 'full_name': self.full_name
         }

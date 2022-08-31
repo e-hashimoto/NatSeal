@@ -20,7 +20,8 @@ class Location(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'coordinates': self.coordinates,
+            'latitude': self.latitude,
+            'longitude': self.longitude,
             'description': self.description,
             'image_url': self.image_url,
             'created_at': self.created_at

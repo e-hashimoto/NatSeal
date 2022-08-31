@@ -4,7 +4,7 @@ class Seal(db.Model):
     __tablename__ = 'seals'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(40), nullable=False, unique=True)
     scientific_name = db.Column(db.String(120), nullable=False, unique=True)
     image_url = db.Column(db.String(255))
@@ -13,8 +13,8 @@ class Seal(db.Model):
 
 
     # RELATIONSHIPS
-    user = db.relationship('User', back_populates='seals')
-    article = db.relationship('Article', back_populates='seals', cascade='all, delete-orphan')
+    user = db.relationship('User', back_populates='seal')
+    article = db.relationship('Article', back_populates='seal', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {
