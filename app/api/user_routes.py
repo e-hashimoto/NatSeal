@@ -12,13 +12,13 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
-@user_routes.route('/<int:id>/')
+@user_routes.route('/<int:id>')
 @login_required
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
-@user_routes.route('/<int:id>/edit/', methods=['PUT'])
+@user_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
 def edit_user(id):
 
@@ -30,7 +30,7 @@ def edit_user(id):
     db.session.commit()
     return user.to_dict()
 
-@user_routes.route('/<int:id>/', methods=['DELETE'])
+@user_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_user(id):
     user = User.query.get(id)

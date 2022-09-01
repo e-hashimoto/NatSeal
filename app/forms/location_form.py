@@ -13,10 +13,19 @@ def description_length(form, field):
     if len(description_body) == 0:
         raise ValidationError("We're sorry.  The location description can be no longer than 10,000 characters.")
 
-# def latitude_not_number(form, field):
-#     latitude = field.data
-#     if input(latitude)
+def latitude_not_float(form, field):
+    latitude = field.data
+    if type(latitude) is not float:
+        raise ValidationError("Please provide a decimal for latitude.")
+    if len(latitude) == 0:
+        raise ValidationError('Please provide a decimal value for latitude.')
 
+def longitude_not_float(form, field):
+    longitude = field.data
+    if type(longitude) is not float:
+        raise ValidationError("Please provide a decimal for longitude.")
+    if len(longitude) == 0:
+        raise ValidationError("Please provide a decimal value for longitude.")
 
 class LocationForm(FlaskForm):
     user_id = StringField('User ID', validators=[DataRequired()])

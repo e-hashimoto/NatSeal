@@ -9,7 +9,7 @@ travel_routes = Blueprint('travels', __name__)
 
 # Edit a Travel Opportunity
 
-@travel_routes.route('/<int:id>/edit/', methods=['PUT'])
+@travel_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
 def edit_travel(id):
     data = request.json
@@ -30,7 +30,7 @@ def all_travels():
 
 # Get a Travel Opportunity
 
-@travel_routes.route('/<int:id>/')
+@travel_routes.route('/<int:id>')
 @login_required
 def one_travels(id):
     travel = Travel.query.get(id)
@@ -54,7 +54,7 @@ def post_travel():
         return travel.to_dict()
 
 # Delete a Traveling Opportunity
-@travel_routes.route('/<int:id/', methods=['DELETE'])
+@travel_routes.route('/<int:id', methods=['DELETE'])
 @login_required
 def edit_travel(id):
     travel = Travel.query.get(id)
