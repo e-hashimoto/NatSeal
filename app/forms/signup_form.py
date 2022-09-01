@@ -31,7 +31,7 @@ def email_validations(form, field):
     email = field.data
 
     if '@' not in email:
-        raise ValidationError('Email must be avalid email.')
+        raise ValidationError('Email must be a valid email.')
     if len(email) > 255:
         raise ValidationError('Email cannot be more than 255 characters.')
     elif len(email) == 0:
@@ -43,18 +43,26 @@ def email_exists(form, field):
     if existing_email:
         raise ValidationError('Email is already in use.')
 
-def full_name_length(form, field):
-    full_name = field.data
+# def full_name_length(form, field):
+#     full_name = field.data
 
-    if len(full_name) > 128:
-        raise ValidationError('Full name cannot be longer than 128 characters.')
-    if len(full_name) == 0:
-        raise ValidationError('Full name is required.')
+#     if len(full_name) > 128:
+#         raise ValidationError('Full name cannot be longer than 128 characters.')
+#     if len(full_name) == 0:
+#         raise ValidationError('Full name is required.')
+
+def password_length(form, field):
+    password = field.data
+
+    if len(password) < 6:
+        raise ValidationError('Password must be at least 6 characters long.')
+    if len(password) > 20:
+        raise ValidationError('Password must be no more than 20 characters long.')
 
 
 class SignUpForm(FlaskForm):
     username = StringField(
         'username', validators=[DataRequired(), username_exists, user_exists, username_empty])
     email = StringField('email', validators=[DataRequired(), user_exists, email_validations, email_exists])
-    password = StringField('password', validators=[DataRequired(), Length(min=6, max=20)])
+    password = StringField('password', validators=[DataRequired(), password_length])
     # full_name =

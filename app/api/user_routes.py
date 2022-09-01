@@ -23,7 +23,7 @@ def user(id):
 def edit_user(id):
 
     user = User.query.get(id)
-    user.description = request.form.get('full_name')
+    # user.description = request.form.get('full_name')
     user.username = request.form.get('username')
 
     db.session.add(user)
