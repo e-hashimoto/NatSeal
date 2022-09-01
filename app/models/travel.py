@@ -6,7 +6,7 @@ class Travel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     location_id = db.Column(db.Integer, db.ForeignKey('locations.id'), nullable=False)
-    description = db.Column(db.String(10000))
+    description = db.Column(db.String(10000), nullable=False)
     image_url = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
 

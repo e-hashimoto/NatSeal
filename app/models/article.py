@@ -7,7 +7,7 @@ class Article(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     seal_id = db.Column(db.Integer, db.ForeignKey('seals.id'), nullable=False)
     title = db.Column(db.String(200), nullable=False)
-    body = db.Column(db.String(15000))
+    body = db.Column(db.String(15000), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
 
     # RELATIONSHIP

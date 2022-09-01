@@ -7,8 +7,8 @@ class Seal(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(40), nullable=False, unique=True)
     scientific_name = db.Column(db.String(120), nullable=False, unique=True)
-    image_url = db.Column(db.String(255))
-    description = db.Column(db.String(10000))
+    image_url = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(10000), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
 
 
