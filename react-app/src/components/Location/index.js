@@ -24,8 +24,12 @@ const Locations = () => {
         <div className="wholepage">
             <div className="column-container">
                 {locations.map((location) => (
-                    <div>
+                    <div className="card-container">
+                        <div className="location-container" key={location.id}>
+                            <div className="author-container" key={location.user_id}>
 
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>

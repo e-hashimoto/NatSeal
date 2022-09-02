@@ -31,7 +31,7 @@ def get_all_articles():
 
 # GET ONE ARTICLE
 
-@article_routes.route('/<int:id>/')
+@article_routes.route('/<int:id>')
 # @login_required
 def get_one_article():
     article = Article.query.get(id)
@@ -56,12 +56,10 @@ def post_article():
 
 # DELETE ONE ARTICLE
 
-@article_routes.route('/<int:id>/', methods=['DELETE'])
+@article_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
 def delete_article(id):
     article = Article.query.get(id)
     db.session.delete(article)
     db.session.commit()
     return article.to_dict()
-
-

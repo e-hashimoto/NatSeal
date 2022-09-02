@@ -18,7 +18,7 @@ def all_travels():
 
 # Get a Travel Opportunity
 
-@travel_routes.route('/<int:id>/')
+@travel_routes.route('/<int:id>')
 # @login_required
 def one_travels(id):
     travel = Travel.query.get(id)
@@ -42,7 +42,7 @@ def post_travel():
         return travel.to_dict()
 
 # Delete a Traveling Opportunity
-@travel_routes.route('/<int:id>/', methods=['DELETE'])
+@travel_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
 def delete_travel(id):
     travel = Travel.query.get(id)

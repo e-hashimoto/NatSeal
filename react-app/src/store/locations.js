@@ -43,7 +43,7 @@ export const getAllLocations = () => async (dispatch) => {
 
 // GET ONE LOCATION
 export const getSingleLocation = (id) => async (dispatch) => {
-    const response = await fetch(`/api/locations/${id}`);
+    const response = await fetch(`/api/locations/${id}/`);
 
     if (response.ok) {
         const data = await response.json();
@@ -77,7 +77,7 @@ export const addNewLocation = (location) => async (dispatch) => {
 // EDIT LOCATION (PUT)
 export const editSingleLocation = (location) => async (dispatch) => {
     const { latitude, longitude, description, image_url, id } = location;
-    const resopnse = await fetch(`/api/locations/${id}/edit`, {
+    const resopnse = await fetch(`/api/locations/${id}/edit/`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ description }),
@@ -91,7 +91,7 @@ export const editSingleLocation = (location) => async (dispatch) => {
 
 // DELETE LOCATION
 export const deleteALocation = (id) => async (dispatch) => {
-    const response = await fetch(`/api/locations/${id}`, {
+    const response = await fetch(`/api/locations/${id}/`, {
         method: "DELETE",
     });
     if (response.ok) {

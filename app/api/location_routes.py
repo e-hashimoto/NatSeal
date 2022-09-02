@@ -8,7 +8,7 @@ location_routes = Blueprint('locations', __name__)
 
 # Edit Single Location
 
-@location_routes.route('/<int:id>/edit/', methods=['PUT'])
+@location_routes.route('/<int:id>/edit', methods=['PUT'])
 # @login_required
 def edit_location(id):
     location = Location.query.get(id)
@@ -32,7 +32,7 @@ def all_locations():
 
 # Get a Single Location
 
-@location_routes.route('/<int:id>/')
+@location_routes.route('/<int:id>')
 # @login_required
 def one_location(id):
     location = Location.query.get(id)
@@ -60,7 +60,7 @@ def create_location():
 
 
 # Delete a Single Location
-@location_routes.route('/<int:id>/', methods=['DELETE'])
+@location_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
 def delete_location(id):
     location = Location.query.get(id)

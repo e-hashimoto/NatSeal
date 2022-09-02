@@ -7,7 +7,7 @@ from app.forms import seal_form
 seal_routes = Blueprint('seals', __name__)
 
 # EDIT A SINGLE SEAL
-@seal_routes.route('/<int:id>/edit/', methods=['PUT'])
+@seal_routes.route('/<int:id>/edit', methods=['PUT'])
 # @login_required
 def edit_one_seal(id):
     seal = Seal.query.get(id)
@@ -30,7 +30,7 @@ def get_all_seals():
     return {'seals': data}
 
 # GET ONE SEAL
-@seal_routes.route('/<int:id>/')
+@seal_routes.route('/<int:id>')
 # @login_required
 def get_one_seal(id):
     seal = Seal.query.get(id)
@@ -55,7 +55,7 @@ def post_seal():
         return seal.to_dict()
 
 # DELETE ONE SEAL
-@seal_routes.route('/<int:id>/', methods=['DELETE'])
+@seal_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
 def delete_seal(id):
     seal = Seal.query.get(id)
