@@ -77,10 +77,10 @@ export const addNewLocation = (location) => async (dispatch) => {
 // EDIT LOCATION (PUT)
 export const editSingleLocation = (location) => async (dispatch) => {
     const { latitude, longitude, description, image_url, id } = location;
-    const resopnse = await fetch(`/api/locations/${id}/edit/`, {
+    const response = await fetch(`/api/locations/${id}/edit/`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ description }),
+        body: JSON.stringify({ latitude, longitude, description, image_url }),
     });
     if (response.ok) {
         const data = await response.json();
