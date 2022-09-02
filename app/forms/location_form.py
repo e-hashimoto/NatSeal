@@ -29,12 +29,13 @@ def longitude_not_float(form, field):
 
 class LocationForm(FlaskForm):
     user_id = StringField('User ID', validators=[DataRequired()])
-    latitude = FloatField('Latitude', validators=[])
-    longitude = FloatField('Longitude', validators=[])
+    latitude = FloatField('Latitude', validators=[DataRequired(), latitude_not_float])
+    longitude = FloatField('Longitude', validators=[DataRequired(), longitude_not_float])
     description = TextAreaField('Description', validators=[Length(min=0, max=10000)])
+    image_url = StringField('Image URL', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
-class EditLocationForm(FlaskForm):
-    latitude = FloatField('Latitude')
-    longitude = FloatField('Longitude')
-    description = TextAreaField('Description', validators=[DataRequired])
+# class EditLocationForm(FlaskForm):
+#     latitude = FloatField('Latitude')
+#     longitude = FloatField('Longitude')
+#     description = TextAreaField('Description', validators=[DataRequired])
