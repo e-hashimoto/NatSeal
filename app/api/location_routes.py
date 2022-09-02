@@ -12,11 +12,14 @@ location_routes = Blueprint('locations', __name__)
 # @login_required
 def edit_location(id):
     location = Location.query.get(id)
-    location.latitude = request.json['latitude']
-    location.longitude = request.json['longitude']
-    location.description = request.json['description']
-    db.session.commit()
-    return location.to_dict()
+    form = location_form.EditLocationForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        location.latitude = request.json['latitude']
+        location.longitude = request.json['longitude']
+        location.description = request.json['description']
+        db.session.commit()
+        return location.to_dict()
 
 # Get All Locations
 

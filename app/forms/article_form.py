@@ -17,6 +17,7 @@ def body_field_empty(form, field):
         raise ValidationError('Please no more than 15,000 characters for the article.')
 
 class ArticleForm(FlaskForm):
+    user_id = StringField('User ID', validators=[DataRequired()])
     seal_id = StringField('Seal ID', validators=[DataRequired()])
     title = StringField('Title', validators=[DataRequired(), title_field_empty])
     body = TextAreaField('Body', validators=[DataRequired(), body_field_empty])
