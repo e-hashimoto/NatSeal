@@ -44,7 +44,7 @@ def post_travel():
 # Delete a Traveling Opportunity
 @travel_routes.route('/<int:id>/', methods=['DELETE'])
 # @login_required
-def _travel(id):
+def delete_travel(id):
     travel = Travel.query.get(id)
     db.session.delete(travel)
     db.session.commit()
@@ -55,9 +55,11 @@ def _travel(id):
 @travel_routes.route('/<int:id>/edit', methods=['PUT'])
 # @login_required
 def edit_travel(id):
-    data = request.json
     travel = Travel.query.get(id)
-    travel.description = request.json['description']
-    travel.image_url = request.json['image']
-    db.session.commit()
-    return travel.to_dict()
+    form = travel_form.EditTravelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        travel.description = request.json['description']
+        travel.image_url = request.json['image']
+        db.session.commit()
+        return travel.to_dict()

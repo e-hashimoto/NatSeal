@@ -27,9 +27,11 @@ class SealForm(FlaskForm):
     scientific_name = StringField('Scientific Name', validators=[DataRequired(), scientific_name_empty, Length(max=120)])
     image_url = StringField('Image', validators=[DataRequired(), no_image, Length(max=255)])
     description = TextAreaField('Description', validators=[DataRequired(), no_description, Length(max=10000)])
+    submit = SubmitField('Submit')
 
 class EditSealForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), name_field_empty, Length(max=40)])
     scientific_name = StringField('Scientific Name', validators=[DataRequired(), scientific_name_empty, Length(max=120)])
     image_url = StringField('Image', validators=[DataRequired(), no_image, Length(max=255)])
     description = TextAreaField('Description', validators=[DataRequired(), no_description, Length(max=10000)])
+    submit = SubmitField('Submit')

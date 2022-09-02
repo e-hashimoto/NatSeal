@@ -11,7 +11,6 @@ location_routes = Blueprint('locations', __name__)
 @location_routes.route('/<int:id>/edit/', methods=['PUT'])
 # @login_required
 def edit_location(id):
-    data = request.json
     location = Location.query.get(id)
     location.latitude = request.json['latitude']
     location.longitude = request.json['longitude']

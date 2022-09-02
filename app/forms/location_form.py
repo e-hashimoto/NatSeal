@@ -1,3 +1,4 @@
+from sqlite3 import DatabaseError
 from typing import Text
 from flask_wtf import FlaskForm
 from wtforms import StringField, FloatField, SubmitField, TextAreaField
@@ -31,11 +32,12 @@ class LocationForm(FlaskForm):
     user_id = StringField('User ID', validators=[DataRequired()])
     latitude = FloatField('Latitude', validators=[DataRequired(), latitude_not_float])
     longitude = FloatField('Longitude', validators=[DataRequired(), longitude_not_float])
-    description = TextAreaField('Description', validators=[Length(min=0, max=10000)])
-    image_url = StringField('Image URL', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired(), description_length])
+    image_url = StringField('Image URL', validators=[DataRequired(), no_image])
     submit = SubmitField('Submit')
 
-# class EditLocationForm(FlaskForm):
-#     latitude = FloatField('Latitude')
-#     longitude = FloatField('Longitude')
-#     description = TextAreaField('Description', validators=[DataRequired])
+class EditLocationForm(FlaskForm):
+    latitude = FloatField('Latitude')
+    longitude = FloatField('Longitude')
+    description = TextAreaField('Description', validators=[DataRequired()])
+    image_url = StringField('Image URL', validators=[DataRequired()])
