@@ -17,7 +17,7 @@ def edit_travel(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         travel.description = request.json['description']
-        travel.image_url = request.json['image']
+        travel.image_url = request.json['image_url']
         db.session.commit()
         return travel.to_dict(), 201
 
