@@ -18,7 +18,7 @@ def edit_article(id):
         article.title = request.json['title']
         article.body = request.json['body']
         db.session.commit()
-        return article.to_dict()
+        return article.to_dict(), 201
 
 # GET ALL ARTICLES
 
@@ -31,9 +31,9 @@ def get_all_articles():
 
 # GET ONE ARTICLE
 
-@article_routes.route('/<int:id>/')
+@article_routes.route('/<int:id>')
 # @login_required
-def get_one_article():
+def get_one_article(id):
     article = Article.query.get(id)
     return article.to_dict()
 
@@ -46,6 +46,7 @@ def post_article():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         article = Article(
+            user_id=form.data['user_id'],
             seal_id=form.data['seal_id'],
             title=form.data['title'],
             body=form.data['body'],
@@ -56,12 +57,10 @@ def post_article():
 
 # DELETE ONE ARTICLE
 
-@article_routes.route('/<int:id>/', methods=['DELETE'])
+@article_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
 def delete_article(id):
     article = Article.query.get(id)
     db.session.delete(article)
     db.session.commit()
     return article.to_dict()
-
-

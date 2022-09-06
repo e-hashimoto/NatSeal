@@ -7,6 +7,20 @@ from app.forms import travel_form
 
 travel_routes = Blueprint('travels', __name__)
 
+# Edit a Travel Opportunity
+
+@travel_routes.route('/<int:id>/edit', methods=['PUT'])
+# @login_required
+def edit_travel(id):
+    travel = Travel.query.get(id)
+    form = travel_form.EditTravelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        travel.description = request.json['description']
+        travel.image_url = request.json['image_url']
+        db.session.commit()
+        return travel.to_dict(), 201
+
 # Get all Traveling Opportunities
 
 @travel_routes.route('/')
@@ -18,7 +32,7 @@ def all_travels():
 
 # Get a Travel Opportunity
 
-@travel_routes.route('/<int:id>/')
+@travel_routes.route('/<int:id>')
 # @login_required
 def one_travels(id):
     travel = Travel.query.get(id)
@@ -42,24 +56,10 @@ def post_travel():
         return travel.to_dict()
 
 # Delete a Traveling Opportunity
-@travel_routes.route('/<int:id>/', methods=['DELETE'])
+@travel_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
 def delete_travel(id):
     travel = Travel.query.get(id)
     db.session.delete(travel)
     db.session.commit()
     return travel.to_dict()
-
-# Edit a Travel Opportunity
-
-@travel_routes.route('/<int:id>/edit', methods=['PUT'])
-# @login_required
-def edit_travel(id):
-    travel = Travel.query.get(id)
-    form = travel_form.EditTravelForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        travel.description = request.json['description']
-        travel.image_url = request.json['image']
-        db.session.commit()
-        return travel.to_dict()

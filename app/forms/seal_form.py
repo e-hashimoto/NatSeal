@@ -23,6 +23,7 @@ def no_description(form, field):
         raise ValidationError('Please provide an image for the seal.')
 
 class SealForm(FlaskForm):
+    user_id = StringField('User ID', validators=[DataRequired()])
     name = StringField('Name', validators=[DataRequired(), name_field_empty, Length(max=40)])
     scientific_name = StringField('Scientific Name', validators=[DataRequired(), scientific_name_empty, Length(max=120)])
     image_url = StringField('Image', validators=[DataRequired(), no_image, Length(max=255)])

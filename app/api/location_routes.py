@@ -8,7 +8,7 @@ location_routes = Blueprint('locations', __name__)
 
 # Edit Single Location
 
-@location_routes.route('/<int:id>/edit/', methods=['PUT'])
+@location_routes.route('/<int:id>/edit', methods=['PUT'])
 # @login_required
 def edit_location(id):
     location = Location.query.get(id)
@@ -18,8 +18,9 @@ def edit_location(id):
         location.latitude = request.json['latitude']
         location.longitude = request.json['longitude']
         location.description = request.json['description']
+        location.image_url = request.json['image_url']
         db.session.commit()
-        return location.to_dict()
+        return location.to_dict(), 201
 
 # Get All Locations
 
@@ -32,7 +33,7 @@ def all_locations():
 
 # Get a Single Location
 
-@location_routes.route('/<int:id>/')
+@location_routes.route('/<int:id>')
 # @login_required
 def one_location(id):
     location = Location.query.get(id)
@@ -44,7 +45,6 @@ def one_location(id):
 def create_location():
     form = location_form.LocationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data, 'HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
     if form.validate_on_submit():
         location = Location(
             user_id=form.data['user_id'],
@@ -53,14 +53,13 @@ def create_location():
             description=form.data['description'],
             image_url=form.data['image_url']
         )
-        print(location, '++++++++++++++++++++++++++++++++++')
         db.session.add(location)
         db.session.commit()
         return location.to_dict()
 
 
 # Delete a Single Location
-@location_routes.route('/<int:id>/', methods=['DELETE'])
+@location_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
 def delete_location(id):
     location = Location.query.get(id)
