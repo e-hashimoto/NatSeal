@@ -19,7 +19,7 @@ def edit_one_seal(id):
         seal.image_url = request.json['image_url']
         seal.description = request.json['description']
         db.session.commit()
-        return Seal.to_dict()
+        return seal.to_dict(), 201
 
 # GET ALL SEALS
 @seal_routes.route('/')

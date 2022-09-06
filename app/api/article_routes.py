@@ -18,7 +18,7 @@ def edit_article(id):
         article.title = request.json['title']
         article.body = request.json['body']
         db.session.commit()
-        return article.to_dict()
+        return article.to_dict(), 201
 
 # GET ALL ARTICLES
 
@@ -46,6 +46,7 @@ def post_article():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         article = Article(
+            user_id=form.data['user_id'],
             seal_id=form.data['seal_id'],
             title=form.data['title'],
             body=form.data['body'],
