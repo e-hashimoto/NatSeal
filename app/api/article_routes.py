@@ -33,7 +33,7 @@ def get_all_articles():
 
 @article_routes.route('/<int:id>')
 # @login_required
-def get_one_article():
+def get_one_article(id):
     article = Article.query.get(id)
     return article.to_dict()
 
