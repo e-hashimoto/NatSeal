@@ -15,6 +15,15 @@ const Locations = () => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
+        async function fetchData() {
+            const response = await fetch("/api/users/");
+            const responseData = await response.json();
+            setUsers(responseData.users);
+        }
+        fetchData();
+    }, []);
+
+    useEffect(() => {
         dispatch(getAllLocations());
     }, [dispatch]);
 
@@ -27,7 +36,7 @@ const Locations = () => {
                     <div className="card-container">
                         <div className="location-container" key={location.id}>
                             <div className="author-container" key={location.user_id}>
-
+                                
                             </div>
                         </div>
                     </div>
@@ -36,3 +45,5 @@ const Locations = () => {
         </div>
     )
 }
+
+export default Locations;

@@ -1,4 +1,4 @@
-import { response } from "express";
+// import { response } from "express";
 
 export const GET_SEALS = "/home/getSeals";
 export const GET_SEAL = "/seals/getSeal";
@@ -33,7 +33,7 @@ const removeSeal = (seal) => ({
 
 // GET ALL SEALS
 export const getAllSeals = () => async (dispatch) => {
-    const resposne = await fetch("/api/seals/");
+    const response = await fetch("/api/seals/");
 
     if (response.ok) {
         const data = await response.json();
