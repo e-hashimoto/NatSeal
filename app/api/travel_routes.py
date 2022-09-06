@@ -62,4 +62,4 @@ def edit_travel(id):
         travel.description = request.json['description']
         travel.image_url = request.json['image']
         db.session.commit()
-        return travel.to_dict()
+        return travel.to_dict(), 201

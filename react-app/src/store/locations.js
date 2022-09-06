@@ -1,4 +1,4 @@
-import { response } from "express";
+// import { response } from "express";
 
 export const GET_LOCATIONS = "/home/getLocations";
 export const GET_LOCATION = "/locations/getLocation";
