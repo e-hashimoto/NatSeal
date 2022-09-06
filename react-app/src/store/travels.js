@@ -41,7 +41,7 @@ export const getAllTravels = () => async (dispatch) => {
 
 // GET ONE TRAVEL
 export const getSingleTravel = (id) => async (dispatch) => {
-    const response = await fetch(`/api/locations/${id}`);
+    const response = await fetch(`/api/travels/${id}/`);
 
     if (response.ok) {
         const data = await response.json();
@@ -73,7 +73,7 @@ export const addNewTravel = (travel) => async (dispatch) => {
 
 // EDIT TRAVEL (PUT)
 export const editSingleTravel = (travel) => async (dispatch) => {
-    const { user_id, location_id, description, image_url } = travel;
+    const { user_id, location_id, description, image_url, id } = travel;
     const response = await fetch(`/api/travels/${id}/edit/`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -106,7 +106,7 @@ const travelReducer = (state = initialState, action) => {
         case GET_TRAVELS:
             const travels = action.travels;
             newState = { ...state };
-            travels.Travels.forEach((travel) => {
+            travels.travels.forEach((travel) => {
                 newState[travel.id] = travel;
             });
             return newState;

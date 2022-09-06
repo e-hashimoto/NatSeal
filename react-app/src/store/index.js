@@ -2,10 +2,16 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session';
 import locationReducer from './locations';
+import travelReducer from './travels';
+import sealReducer from './seals';
+import articleReducer from './articles';
 
 const rootReducer = combineReducers({
   session,
-  locations: locationReducer
+  locations: locationReducer,
+  travels: travelReducer,
+  seals: sealReducer,
+  articles: articleReducer
 });
 
 
