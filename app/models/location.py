@@ -5,9 +5,9 @@ class Location(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    latitude = db.Column(db.Float)
-    longitude = db.Column(db.Float)
-    description = db.Column(db.String(10000))
+    latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
+    description = db.Column(db.String(10000), nullable=False)
     image_url = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
 
