@@ -7,6 +7,20 @@ from app.forms import travel_form
 
 travel_routes = Blueprint('travels', __name__)
 
+# Edit a Travel Opportunity
+
+@travel_routes.route('/<int:id>/edit', methods=['PUT'])
+# @login_required
+def edit_travel(id):
+    travel = Travel.query.get(id)
+    form = travel_form.EditTravelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        travel.description = request.json['description']
+        travel.image_url = request.json['image']
+        db.session.commit()
+        return travel.to_dict(), 201
+
 # Get all Traveling Opportunities
 
 @travel_routes.route('/')
@@ -49,17 +63,3 @@ def delete_travel(id):
     db.session.delete(travel)
     db.session.commit()
     return travel.to_dict()
-
-# Edit a Travel Opportunity
-
-@travel_routes.route('/<int:id>/edit', methods=['PUT'])
-# @login_required
-def edit_travel(id):
-    travel = Travel.query.get(id)
-    form = travel_form.EditTravelForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        travel.description = request.json['description']
-        travel.image_url = request.json['image']
-        db.session.commit()
-        return travel.to_dict(), 201
