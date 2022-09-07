@@ -4,10 +4,20 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, FloatField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, Length
 
+def no_name(form, field):
+    name_body = field.data
+    if len(name_body) == 0:
+        raise ValidationError('Please provide a name for this location.')
+
+def name_too_long(form, field):
+    name_body = field.data
+    if len(name_body) > 100:
+        raise ValidationError('Please keep the length of the name of the location under 100 characters.')
+
 def no_image(form, field):
     image_url_body = field.data
     if len(image_url_body) == 0:
-        raise ValidationError('Please provide an image of this location')
+        raise ValidationError('Please provide an image of this location.')
 
 def description_length(form, field):
     description_body = field.data
@@ -32,6 +42,7 @@ def longitude_not_float(form, field):
 
 class LocationForm(FlaskForm):
     user_id = StringField('User ID', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired(), no_name, name_too_long])
     latitude = FloatField('Latitude', validators=[DataRequired(), latitude_not_float])
     longitude = FloatField('Longitude', validators=[DataRequired(), longitude_not_float])
     description = TextAreaField('Description', validators=[DataRequired(), description_length])
@@ -39,7 +50,9 @@ class LocationForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class EditLocationForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), no_name, name_too_long])
     latitude = FloatField('Latitude')
     longitude = FloatField('Longitude')
     description = TextAreaField('Description', validators=[DataRequired()])
     image_url = StringField('Image URL', validators=[DataRequired()])
+    submit = SubmitField('Submit')

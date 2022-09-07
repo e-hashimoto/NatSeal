@@ -5,6 +5,7 @@ class Location(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(10000), nullable=False)
@@ -20,6 +21,7 @@ class Location(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'name': self.name,
             'latitude': self.latitude,
             'longitude': self.longitude,
             'description': self.description,

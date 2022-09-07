@@ -31,20 +31,20 @@ const removeArticle = (article) => ({
 
 // GET ALL ARTICLES
 export const getAllArticles = () => async (dispatch) => {
-    const response = await fetch("/api/articles/");
+    const res = await fetch("/api/articles/");
 
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(getArticles(data));
     }
 };
 
 // GET ONE ARTICLE
 export const getSingleArticle = (id) => async (dispatch) => {
-    const response = await fetch(`/api/articles/${id}/`);
+    const res = await fetch(`/api/articles/${id}/`);
 
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(getArticle(data));
         return data;
     }
@@ -59,13 +59,13 @@ export const addNewArticle = (article) => async (dispatch) => {
     form.append("seal_id", seal_id);
     form.append("title", title);
     form.append("body", body);
-    const response = await fetch("/api/articles/", {
+    const res = await fetch("/api/articles/", {
         method: "POST",
         body: form
     });
 
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(addArticle(data));
         return data;
     }
@@ -75,13 +75,13 @@ export const addNewArticle = (article) => async (dispatch) => {
 export const editSingleArticle = (article) => async (dispatch) => {
     const { user_id, seal_id, title, body, id } = article;
 
-    const response = await fetch(`/api/articles/${id}/edit/`, {
+    const res = await fetch(`/api/articles/${id}/edit/`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id, seal_id, title, body })
     });
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(editArticle(data));
         return data;
     }
@@ -89,11 +89,11 @@ export const editSingleArticle = (article) => async (dispatch) => {
 
 // DELETE ARTICLE
 export const deleteAnArticle = (id) => async (dispatch) => {
-    const response = await fetch(`/api/articles/${id}/`, {
+    const res = await fetch(`/api/articles/${id}/`, {
         method: "DELETE",
     });
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(removeArticle(data.id));
     };
 };

@@ -8,6 +8,8 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import * as sessionActions from './store/session';
+import Home from './components/Home'
+import Locations from './components/Locations'
 // import Arti
 
 function App() {
@@ -42,7 +44,10 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/home' exact={true} >
-          <h1>My Home Page</h1>
+          <Home />
+        </ProtectedRoute>
+        <ProtectedRoute >
+          <Locations />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
