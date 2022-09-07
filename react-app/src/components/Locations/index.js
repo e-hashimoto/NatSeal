@@ -54,6 +54,7 @@ const Locations = () => {
                     </div>
                 ))}
             </div>
+            
         </div>
     );
 };
