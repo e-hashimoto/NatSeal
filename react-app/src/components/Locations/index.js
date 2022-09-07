@@ -30,17 +30,12 @@ const Locations = () => {
     if (!sessionUser) return <Redirect to="/login" />;
 
     return (
-        <div className="wholepage">
-            <div className="column-container">
-                {locations.map((location) => (
-                    <div className="card-container">
-                        <div className="location-container" key={location.id}>
-                            <div className="author-container" key={location.user_id}>
-                                
-                            </div>
-                        </div>
-                    </div>
-                ))}
+        <div className="location-page">
+            <div className="image-container">
+
+                {/* <div className="img" key={location.id}>
+                    {location.image_url}
+                </div> */}
             </div>
         </div>
     )
