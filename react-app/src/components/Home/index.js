@@ -31,7 +31,7 @@ function Home() {
                     NatSeal
                 </h1>
             </div>
-            <div>
+            <div className="footer">
 
             </div>
         </div>

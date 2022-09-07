@@ -31,14 +31,31 @@ const Locations = () => {
 
     return (
         <div className="location-page">
-            <div className="image-container">
-
-                {/* <div className="img" key={location.id}>
-                    {location.image_url}
-                </div> */}
+            <div className="column-container">
+                {locations.map((location) => (
+                    <div className="location-container" key={location.id}>
+                        <div className="location-image" key={location.image_url}>
+                            <img
+                                alt="location"
+                                className="location-image-url"
+                                src={location.image_url}
+                                id="location_img"
+                            />
+                        </div>
+                        <div className="location-latitude" key={location.latitude}>
+                            Latitude: {location.latitude}
+                        </div>
+                        <div className="location-longitude" key={location.longitude}>
+                            Longitude: {location.longitude}
+                        </div>
+                        <div className="location-description" key={location.description}>
+                            About: {location.description}
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Locations;
