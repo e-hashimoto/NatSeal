@@ -1,6 +1,6 @@
 import "./home.css";
 import NavBar from "../NavBar";
-import e from "express";
+// import e from "express";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
@@ -23,7 +23,7 @@ function Home() {
     }, []);
 
     if (!sessionUser) return <Redirect to="/login" />;
-    
+
     return (
         <div className="homepage">
             <div className="header">

@@ -1,4 +1,4 @@
-// import { response } from "express";
+// import { res } from "express";
 
 export const GET_LOCATIONS = "/home/getLocations";
 export const GET_LOCATION = "/locations/getLocation";
@@ -33,20 +33,20 @@ const removeLocation = (location) => ({
 
 // GET ALL LOCATIONS
 export const getAllLocations = () => async (dispatch) => {
-    const response = await fetch("/api/locations/");
+    const res = await fetch("/api/locations/");
 
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(getLocations(data));
     }
 };
 
 // GET ONE LOCATION
 export const getSingleLocation = (id) => async (dispatch) => {
-    const response = await fetch(`/api/locations/${id}/`);
+    const res = await fetch(`/api/locations/${id}/`);
 
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(getLocation(data));
         return data;
     }
@@ -62,13 +62,13 @@ export const addNewLocation = (location) => async (dispatch) => {
     form.append("longitude", longitude);
     form.append("description", description);
     form.append("image_url", image_url);
-    const response = await fetch("/api/locations/", {
+    const res = await fetch("/api/locations/", {
         method: "POST",
         body: form,
     });
 
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(addLocation(data));
         return data;
     }
@@ -77,13 +77,13 @@ export const addNewLocation = (location) => async (dispatch) => {
 // EDIT LOCATION (PUT)
 export const editSingleLocation = (location) => async (dispatch) => {
     const { latitude, longitude, description, image_url, id } = location;
-    const response = await fetch(`/api/locations/${id}/edit/`, {
+    const res = await fetch(`/api/locations/${id}/edit/`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ latitude, longitude, description, image_url }),
     });
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(editLocation(data));
         return data;
     }
@@ -91,11 +91,11 @@ export const editSingleLocation = (location) => async (dispatch) => {
 
 // DELETE LOCATION
 export const deleteALocation = (id) => async (dispatch) => {
-    const response = await fetch(`/api/locations/${id}/`, {
+    const res = await fetch(`/api/locations/${id}/`, {
         method: "DELETE",
     });
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(removeLocation(data.id));
     }
 };

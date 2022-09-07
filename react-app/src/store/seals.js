@@ -1,4 +1,4 @@
-// import { response } from "express";
+// import { res } from "express";
 
 export const GET_SEALS = "/home/getSeals";
 export const GET_SEAL = "/seals/getSeal";
@@ -33,20 +33,20 @@ const removeSeal = (seal) => ({
 
 // GET ALL SEALS
 export const getAllSeals = () => async (dispatch) => {
-    const response = await fetch("/api/seals/");
+    const res = await fetch("/api/seals/");
 
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(getSeals(data));
     }
 };
 
 // GET ONE SEAL
 export const getOneSeal = (id) => async (dispatch) => {
-    const response = await fetch(`/api/seals/${id}`);
+    const res = await fetch(`/api/seals/${id}`);
 
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(getSeal(data));
         return data;
     }
@@ -62,13 +62,13 @@ export const addNewSeal = (seal) => async (dispatch) => {
     form.append("scientific_name", scientific_name);
     form.append("image_url",  image_url);
     form.append("description", description);
-    const response = await fetch("/api/seals/", {
+    const res = await fetch("/api/seals/", {
         method: "POST",
         body: form,
     });
 
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(addSeal(data));
         return data;
     }
@@ -78,13 +78,13 @@ export const addNewSeal = (seal) => async (dispatch) => {
 export const editSingleSeal = (seal) => async (dispatch) => {
     const { user_id, name, scientific_name, image_url, description, id } = seal;
 
-    const response = await fetch(`/api/seals/${id}/edit/`, {
+    const res = await fetch(`/api/seals/${id}/edit/`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id, name, scientific_name, image_url, description })
     });
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(editSeal(data));
         return data;
     }
@@ -92,11 +92,11 @@ export const editSingleSeal = (seal) => async (dispatch) => {
 
 // DELETE SEAL
 export const deleteASeal = (id) => async (dispatch) => {
-    const response = await fetch(`/api/seals/${id}/`, {
+    const res = await fetch(`/api/seals/${id}/`, {
         method: "DELETE",
     });
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(removeSeal(data.id));
     }
 };
