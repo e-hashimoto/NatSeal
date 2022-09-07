@@ -15,6 +15,7 @@ def edit_location(id):
     form = location_form.EditLocationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        location.name = request.json['name']
         location.latitude = request.json['latitude']
         location.longitude = request.json['longitude']
         location.description = request.json['description']
@@ -48,6 +49,7 @@ def create_location():
     if form.validate_on_submit():
         location = Location(
             user_id=form.data['user_id'],
+            name=form.data['name'],
             latitude=form.data['latitude'],
             longitude=form.data['longitude'],
             description=form.data['description'],
