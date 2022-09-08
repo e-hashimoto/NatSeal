@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSingleLocation, deleteALocation, editSingleLocation } from "../../store/locations";
 import { useParams, useHistory } from "react-router-dom";
 import './index.css';
+import EditLocation from "../EditLocation/EditLocation";
 
 function SingleLocation() {
     const dispatch = useDispatch();
@@ -25,7 +26,9 @@ function SingleLocation() {
         <div className="single-location-page">
             <h1 className="location-name">{location.name}</h1>
             <div className="location-image">
-                {location.image_url}
+                <img
+                    src={location.image_url}
+                />
             </div>
             <h2 className="coordinates">Coordinates</h2>
                 <ul className="decimal-coordinates">
@@ -41,6 +44,9 @@ function SingleLocation() {
                 <div className="location-description-body">
                     {location.description}
                 </div>
+            </div>
+            <div>
+                <EditLocation />
             </div>
         </div>
     )
