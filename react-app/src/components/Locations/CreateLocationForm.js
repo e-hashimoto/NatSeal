@@ -14,6 +14,7 @@ const CreateLocationForm = () => {
     const [longitude, setLongitude] = useState("");
     const [description, setDescription] = useState("");
     const [image_url, setImage_url] = useState("");
+    const [validationErrors, setValidationErrors] = useState([]);
 
     const updateName = (e) => setName(e.target.value);
     const updateLatitude = (e) => setLatitude(e.target.value);
@@ -26,6 +27,7 @@ const CreateLocationForm = () => {
         e.preventDefault();
 
         if (!user) history.push('/login');
+        const errors = [];
 
         const payload = {
             name,
@@ -34,6 +36,18 @@ const CreateLocationForm = () => {
             description,
             image_url
         };
+
+        if (name.length === 0) errors.push("Please provide a name for this location.");
+        if (name.length > 100) errors.push("Please keep the length of th name of the location no more than 100 characters.")
+        if (latitude.length === 0) errors.push("Please provide the latitude of the location.")
+        if (longitude.length === 0) errors.push("Please provide the longitude of the location.")
+        if (description.length === 0) errors.push("Please provide a description for this location.")
+        if (!image_url.includes('.jpg' || '.jpeg' || '.png')) errors.push("Please provide a picture for this location.")
+
+        if (errors.length) {
+            setValidationErrors(errors);
+            return;
+        }
 
         let createdLocation = await dispatch(createdLocation(payload));
         if (createdLocation) {
