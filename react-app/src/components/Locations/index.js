@@ -1,4 +1,5 @@
 import { getAllLocations, getSingleLocation } from "../../store/locations";
+import CreateLocationForm from "./CreateLocationForm";
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -43,7 +44,7 @@ const Locations = () => {
             })}
             </div>
             <div className="create-location-form">
-                
+                <CreateLocationForm />
             </div>
         </div>
     );
