@@ -1,4 +1,4 @@
-import { getAllLocations } from "../../store/locations";
+import { getAllLocations, getSingleLocation } from "../../store/locations";
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,34 +27,24 @@ const Locations = () => {
         dispatch(getAllLocations());
     }, [dispatch]);
 
+    const handleClick = (id) => {
+        dispatch(getSingleLocation(id));
+    };
+
     if (!sessionUser) return <Redirect to="/login" />;
 
     return (
         <div className="location-page">
             <div className="column-container">
-                {locations.map((location) => (
-                    <div className="location-container" key={location.id}>
-                        <div className="location-image" key={location.image_url}>
-                            <img
-                                alt="location"
-                                className="location-image-url"
-                                src={location.image_url}
-                                id="location_img"
-                            />
-                        </div>
-                        <div className="location-latitude" key={location.latitude}>
-                            Latitude: {location.latitude}
-                        </div>
-                        <div className="location-longitude" key={location.longitude}>
-                            Longitude: {location.longitude}
-                        </div>
-                        <div className="location-description" key={location.description}>
-                            About: {location.description}
-                        </div>
+                {locations.map((location) => {
+                    return <div key={location.id}>
+                        <NavLink exact to={`/locations/${location.id}`} onClick={() => handleClick(location.id)}>{location.name}</NavLink>
                     </div>
-                ))}
+            })}
             </div>
-            
+            <div className="create-location-form">
+                
+            </div>
         </div>
     );
 };
