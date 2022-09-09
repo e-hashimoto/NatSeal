@@ -9,12 +9,19 @@ const CreateTravelForm = () => {
 
     const user = useSelector((state) => state.session.user);
 
+    const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [image_url, setImage_url] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
+    const [location, setLocation] = useState("");
 
     const updateDescription = (e) => setDescription(e.target.value);
     const updateImage_url = (e) => setImage_url(e.target.value);
+    const updateLocation = (e) => setLocation(e.target.value);
+
+    // useEffect(() => {
+    //     const locationArr = Object.values(sessions).filter((currentLocation) => )
+    // })
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,8 +43,9 @@ const CreateTravelForm = () => {
         }
 
         const payload = {
-            userId: user?.id,
-            locationId: location?.id,
+            user_id: user?.id,
+            location_id: location?.id,
+            name,
             description,
             image_url
         };
@@ -65,6 +73,9 @@ const CreateTravelForm = () => {
                         </li>
                     ))}
                 </ul>
+                <select className="location-selector" value={location} onChange={updateLocation}
+                    {}
+                />
                 <textarea
                     type="string"
                     required

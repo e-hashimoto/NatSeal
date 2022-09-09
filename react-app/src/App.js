@@ -17,6 +17,8 @@ import * as sessionActions from "./store/session";
 import Home from "./components/Home";
 import Locations from "./components/Locations";
 import SingleLocation from "./components/SingleLocation";
+import Travels from "./components/Travels";
+import SingleTravel from "./components/SingleTravel";
 // import Arti
 
 function App() {
@@ -58,6 +60,12 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/locations/:id" exact={true}>
           <SingleLocation />
+        </ProtectedRoute>
+        <ProtectedRoute path="/travels" exact={true}>
+          <Travels />
+        </ProtectedRoute>
+        <ProtectedRoute path="/travels/:id" exact={true}>
+          <SingleTravel />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
