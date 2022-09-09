@@ -50,7 +50,7 @@ const CreateLocationForm = () => {
 
         if (errors.length) {
             setValidationErrors(errors);
-            return errors;
+            return;
         }
 
         let createdLocation = await dispatch(addNewLocation(payload));
