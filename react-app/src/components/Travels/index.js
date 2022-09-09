@@ -38,6 +38,11 @@ const Travels = () => {
                     </div>
                 })}
             </div>
+            <div className="create-travel-form">
+                <CreateTravelForm />
+            </div>
         </div>
     )
 }
+
+export default Travels;
