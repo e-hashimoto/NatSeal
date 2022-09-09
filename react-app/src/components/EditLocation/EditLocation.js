@@ -3,7 +3,7 @@ import { useDispatch, useSelector} from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { editSingleLocation, getAllLocations } from "../../store/locations";
 
-function EditLocation() {
+function EditLocation({ setShowModal }) {
     const [name, setName] = useState("");
     const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
@@ -40,9 +40,7 @@ function EditLocation() {
         };
 
         let updatedLocation = await dispatch(editSingleLocation(payload));
-        if (updatedLocation) {
-            history.push(`/location/${location?.id}`);
-        }
+        history.push(`/`)
     };
 
     const handleCancelClick = (e) => {
@@ -61,14 +59,14 @@ function EditLocation() {
                     onChange={updateName}
                 />
                 <input
-                    type="float"
+                    type="number"
                     placeholder="Latitude"
                     value={latitude}
                     required
                     onChange={updateLatitude}
                 />
                 <input
-                    type="float"
+                    type="number"
                     placeholder="Longitude"
                     value={longitude}
                     required
@@ -90,7 +88,7 @@ function EditLocation() {
                     onChange={updateImage_url}
                     accept=".jpg, .jpeg, .png"
                 />
-                <button type="button" className="submit-edit-location">
+                <button type="button" className="submit-edit-location" onClick={handleSubmit}>
                     Submit
                 </button>
                 <button type="button" onClick={handleCancelClick}>
@@ -103,3 +101,5 @@ function EditLocation() {
 }
 
 export default EditLocation;
+
+// function EditLocation() {}

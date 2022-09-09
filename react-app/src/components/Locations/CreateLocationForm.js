@@ -40,6 +40,9 @@ const CreateLocationForm = () => {
         if (name.length === 0) errors.push("Please provide a name for this location.");
         if (name.length > 100) errors.push("Please keep the length of th name of the location no more than 100 characters.")
         if (latitude.length === 0) errors.push("Please provide the latitude of the location.")
+        // Make sure latitude and longitude are not text.
+        if (!latitude.isInteger) errors.push("Please submit an integer or decimal for the location's latitude.")
+        if (!longitude.isInteger) errors.push("Please submit an integer or decimal for the location's longitude.")
         if (longitude.length === 0) errors.push("Please provide the longitude of the location.")
         if (description.length === 0) errors.push("Please provide a description for this location.")
         if (!image_url.includes('.jpg' || '.jpeg' || '.png')) errors.push("Please provide a picture for this location.")
@@ -62,7 +65,15 @@ const CreateLocationForm = () => {
     return (
         <section className="new-location-form">
             <h1>Tell us about a new location!</h1>
+            <h2 className="required-message">All fields are required!</h2>
             <form className="create-location-form" onSubmit={handleSubmit}>
+                <ul>
+                    {validationErrors.map((error, idx) => (
+                        <li className="errors-create-location" key={idx}>
+                            {error}
+                        </li>
+                    ))}
+                </ul>
                 <input
                     type="string"
                     placeholder="Name"
@@ -72,7 +83,7 @@ const CreateLocationForm = () => {
                     className="name-of-location"
                 />
                 <input
-                    type="inputmode"
+                    type="number"
                     placeholder="Latitude"
                     className="latitude-for-location"
                     required
@@ -80,7 +91,7 @@ const CreateLocationForm = () => {
                     onChange={updateLatitude}
                 />
                 <input
-                    type="inputmode"
+                    type="number"
                     placeholder="Longitude"
                     className="longitude-for-location"
                     required
