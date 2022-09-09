@@ -9,5 +9,13 @@ const CreateTravelForm = () => {
 
     const user = useSelector((state) => state.session.user);
 
-    const 
-}
+    const [description, setDescription] = useState("");
+    const [image_url, setImage_url] = useState("");
+
+    const updateDescription = (e) => setDescription(e.target.value);
+    const updateImage_url = (e) => setImage_url(e.target.value);
+
+    
+};
+
+export default CreateTravelForm;

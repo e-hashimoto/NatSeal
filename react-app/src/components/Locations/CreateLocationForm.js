@@ -30,9 +30,10 @@ const CreateLocationForm = () => {
         const errors = [];
 
         const payload = {
+            // id,
             name,
-            +latitude,
-            +longitude,
+            latitude: +latitude,
+            longitude: +longitude,
             description,
             image_url
         };
