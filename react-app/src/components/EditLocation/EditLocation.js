@@ -86,7 +86,7 @@ function EditLocation({ setShowModal }) {
                     type="file"
                     name="Image URL"
                     onChange={updateImage_url}
-                    accept=".jpg, .jpeg, .png"
+                    accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG"
                 />
                 <button type="button" className="submit-edit-location" onClick={handleSubmit}>
                     Submit

@@ -31,8 +31,8 @@ const CreateLocationForm = () => {
 
         const payload = {
             name,
-            latitude,
-            longitude,
+            +latitude,
+            +longitude,
             description,
             image_url
         };
@@ -49,10 +49,10 @@ const CreateLocationForm = () => {
 
         if (errors.length) {
             setValidationErrors(errors);
-            return;
+            return errors;
         }
 
-        let createdLocation = await dispatch(createdLocation(payload));
+        let createdLocation = await dispatch(addNewLocation(payload));
         if (createdLocation) {
             history.push(`/locations/${createdLocation.id}`);
         };
