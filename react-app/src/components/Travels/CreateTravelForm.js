@@ -73,9 +73,9 @@ const CreateTravelForm = () => {
                         </li>
                     ))}
                 </ul>
-                <select className="location-selector" value={location} onChange={updateLocation}
+                {/* <select className="location-selector" value={location} onChange={updateLocation}
                     {}
-                />
+                /> */}
                 <textarea
                     type="string"
                     required
