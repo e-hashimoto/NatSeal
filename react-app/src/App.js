@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, NavLink, Redirect } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
-import * as sessionActions from './store/session';
-import Home from './components/Home'
-import Locations from './components/Locations'
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  NavLink,
+  Redirect,
+} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import LoginForm from "./components/auth/LoginForm";
+import SignUpForm from "./components/auth/SignUpForm";
+import NavBar from "./components/NavBar";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import UsersList from "./components/UsersList";
+import User from "./components/User";
+import * as sessionActions from "./store/session";
+import Home from "./components/Home";
+import Locations from "./components/Locations";
+import SingleLocation from "./components/SingleLocation";
+import Travels from "./components/Travels";
+import SingleTravel from "./components/SingleTravel";
 // import Arti
 
 function App() {
@@ -31,23 +40,32 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path='/login' exact={true}>
+        <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
-        <Route path='/sign-up' exact={true}>
+        <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+        <ProtectedRoute path="/users" exact={true}>
+          <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
+        <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/home' exact={true} >
+        <ProtectedRoute path="/home" exact={true}>
           <Home />
         </ProtectedRoute>
-        <ProtectedRoute >
+        <ProtectedRoute path="/locations" exact={true}>
           <Locations />
+        </ProtectedRoute>
+        <ProtectedRoute path="/locations/:id" exact={true}>
+          <SingleLocation />
+        </ProtectedRoute>
+        <ProtectedRoute path="/travels" exact={true}>
+          <Travels />
+        </ProtectedRoute>
+        <ProtectedRoute path="/travels/:id" exact={true}>
+          <SingleTravel />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

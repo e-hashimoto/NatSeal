@@ -12,7 +12,7 @@ def no_name(form, field):
 def name_too_long(form, field):
     name_body = field.data
     if len(name_body) > 100:
-        raise ValidationError('Please keep the length of the name of the location under 100 characters.')
+        raise ValidationError('Please keep the length of the name of the location no more than 100 characters.')
 
 def no_image(form, field):
     image_url_body = field.data

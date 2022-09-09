@@ -16,6 +16,7 @@ def edit_travel(id):
     form = travel_form.EditTravelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        travel.name = request.json['name']
         travel.description = request.json['description']
         travel.image_url = request.json['image_url']
         db.session.commit()
@@ -48,6 +49,7 @@ def post_travel():
         travel = Travel(
             user_id=form.data['user_id'],
             location_id=form.data['location_id'],
+            name=form.data['name'],
             description=form.data['description'],
             image_url=form.data['image_url']
         )
