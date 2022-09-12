@@ -70,7 +70,10 @@ function SingleLocation() {
                     </button>
                 </>
             ) : (
-                <></>
+                <><div>
+                    Loading...
+                  </div>
+                </>
             )}
         </div>
       </div>
