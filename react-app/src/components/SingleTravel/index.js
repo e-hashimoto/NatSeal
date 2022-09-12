@@ -14,12 +14,12 @@ function SingleTravel() {
   const history = useHistory();
   const { id } = useParams();
   const travel = useSelector((state) => state.travels[id]);
-  const [isLoaded, setLoaded] = useState(false);
+  const [isLoaded, setLoaded] = useState(true);
   const currentUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(getSingleTravel(id))
-        .then(() => setLoaded(true));
+        // .then(() => setLoaded(true));
   }, [id, dispatch]);
 
   const TravelDeleter = async (e) => {
