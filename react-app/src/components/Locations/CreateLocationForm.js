@@ -31,15 +31,18 @@ const CreateLocationForm = () => {
 
         const payload = {
             // id,
-            name,
+            user_id: user?.id,
+            name: name,
             latitude: +latitude,
             longitude: +longitude,
             description,
             image_url
         };
 
+        console.log(payload, "This should be info +++++++++++");
+
         if (name.length === 0) errors.push("Please provide a name for this location.");
-        if (name.length > 100) errors.push("Please keep the length of th name of the location no more than 100 characters.")
+        if (name.length > 100) errors.push("Please keep the length of the name of the location no more than 100 characters.")
         if (latitude.length === 0) errors.push("Please provide the latitude of the location.")
         // Make sure latitude and longitude are not text.
         // if (!latitude.isInteger) errors.push("Please submit an integer or decimal for the location's latitude.")
@@ -52,6 +55,8 @@ const CreateLocationForm = () => {
             setValidationErrors(errors);
             return;
         }
+
+        if (!user) return <Redirect to="/login" />;
 
         let createdLocation = await dispatch(addNewLocation(payload));
         if (createdLocation) {

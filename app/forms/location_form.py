@@ -1,7 +1,7 @@
 from sqlite3 import DatabaseError
 from typing import Text
 from flask_wtf import FlaskForm
-from wtforms import StringField, FloatField, SubmitField, TextAreaField
+from wtforms import StringField, FloatField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, Length
 
 def no_name(form, field):
@@ -47,7 +47,6 @@ class LocationForm(FlaskForm):
     longitude = FloatField('Longitude', validators=[DataRequired(), longitude_not_float])
     description = TextAreaField('Description', validators=[DataRequired(), description_length])
     image_url = StringField('Image URL', validators=[DataRequired(), no_image])
-    submit = SubmitField('Submit')
 
 class EditLocationForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), no_name, name_too_long])
@@ -55,4 +54,3 @@ class EditLocationForm(FlaskForm):
     longitude = FloatField('Longitude')
     description = TextAreaField('Description', validators=[DataRequired()])
     image_url = StringField('Image URL', validators=[DataRequired()])
-    submit = SubmitField('Submit')
