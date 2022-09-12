@@ -9,6 +9,9 @@ Natseal is a clone of National Geographic with the focus on seals, and locations
 * Database: PostgreSQL
 * Hosting: Heroku
 
+## Livelink
+https://natseal.herokuapp.com/
+
 ## Links
 * [MVP Feature List](https://github.com/e-hashimoto/natseal/wiki/MVP-Feature-List)
 * [Database Schema](https://github.com/e-hashimoto/natseal/wiki/Database-Schema-and-Backend-Routes)
