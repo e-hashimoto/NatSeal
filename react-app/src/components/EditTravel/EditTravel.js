@@ -46,7 +46,6 @@ const EditTravel = ({ setShowModal }) => {
         <div className="editor">
             <div className="upload-image-background">
                 <div className="upload-image">
-                    <h1 className="upload-image-h1">Edit Image Description</h1>
                     <form className="upload-form" onSubmit={handleSubmit}>
                         <h2>
                             All fields are required.
