@@ -54,10 +54,11 @@ export const getSingleLocation = (id) => async (dispatch) => {
 
 // POST LOCATION
 export const addNewLocation = (location) => async (dispatch) => {
-    const { user_id, latitude, longitude, description, image_url } = location;
+    const { user_id, name, latitude, longitude, description, image_url } = location;
 
     const form = new FormData();
     form.append("user_id", user_id);
+    form.append("name", name);
     form.append("latitude", latitude);
     form.append("longitude", longitude);
     form.append("description", description);

@@ -1,20 +1,20 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
-import EditLocation from "./EditLocation";
+import EditTravel from "./EditTravel";
 
-function EditLocationModal() {
+function EditTravelModal() {
     const [showModal, setShowModal] = useState(false);
 
     return (
         <>
             <button onClick={() => setShowModal(true)}>Edit</button>
-            {showModal  && (
+            {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <EditLocation setShowModal={setShowModal} />
+                    <EditTravel setShowModal={setShowModal} />
                 </Modal>
             )}
         </>
     )
 }
 
-export default EditLocationModal;
+export default EditTravelModal;

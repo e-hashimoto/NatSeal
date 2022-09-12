@@ -10,7 +10,7 @@ travel_routes = Blueprint('travels', __name__)
 # Edit a Travel Opportunity
 
 @travel_routes.route('/<int:id>/edit', methods=['PUT'])
-# @login_required
+@login_required
 def edit_travel(id):
     travel = Travel.query.get(id)
     form = travel_form.EditTravelForm()
@@ -25,7 +25,7 @@ def edit_travel(id):
 # Get all Traveling Opportunities
 
 @travel_routes.route('/')
-# @login_required
+@login_required
 def all_travels():
     travels = Travel.query.all()
     data = [travel.to_dict() for travel in travels]
@@ -34,14 +34,14 @@ def all_travels():
 # Get a Travel Opportunity
 
 @travel_routes.route('/<int:id>')
-# @login_required
+@login_required
 def one_travels(id):
     travel = Travel.query.get(id)
     return travel.to_dict()
 
 # # Create a Traveling Opportunity
 @travel_routes.route('/', methods=['POST'])
-# @login_required
+@login_required
 def post_travel():
     form = travel_form.TravelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -59,7 +59,7 @@ def post_travel():
 
 # Delete a Traveling Opportunity
 @travel_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_travel(id):
     travel = Travel.query.get(id)
     db.session.delete(travel)

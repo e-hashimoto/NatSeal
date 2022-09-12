@@ -52,10 +52,11 @@ export const getSingleTravel = (id) => async (dispatch) => {
 
 // POST TRAVEL
 export const addNewTravel = (travel) => async (dispatch) => {
-    const { user_id, location_id, description, image_url } = travel;
+    const { user_id, name, location_id, description, image_url } = travel;
 
     const form = new FormData();
     form.append("user_id", user_id);
+    form.append("name", name)
     form.append("location_id", location_id);
     form.append("description", description);
     form.append("image_url", image_url);

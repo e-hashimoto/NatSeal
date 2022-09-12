@@ -8,7 +8,7 @@ seal_routes = Blueprint('seals', __name__)
 
 # EDIT A SINGLE SEAL
 @seal_routes.route('/<int:id>/edit', methods=['PUT'])
-# @login_required
+@login_required
 def edit_one_seal(id):
     seal = Seal.query.get(id)
     form = seal_form.EditSealForm()
@@ -23,7 +23,7 @@ def edit_one_seal(id):
 
 # GET ALL SEALS
 @seal_routes.route('/')
-# @login_required
+@login_required
 def get_all_seals():
     seals = Seal.query.all()
     data = [seal.to_dict() for seal in seals]
@@ -31,14 +31,14 @@ def get_all_seals():
 
 # GET ONE SEAL
 @seal_routes.route('/<int:id>')
-# @login_required
+@login_required
 def get_one_seal(id):
     seal = Seal.query.get(id)
     return seal.to_dict()
 
 # POST ONE SEAL
 @seal_routes.route('/', methods=['POST'])
-# @login_required
+@login_required
 def post_seal():
     form = seal_form.SealForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -56,7 +56,7 @@ def post_seal():
 
 # DELETE ONE SEAL
 @seal_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_seal(id):
     seal = Seal.query.get(id)
     db.session.delete(seal)

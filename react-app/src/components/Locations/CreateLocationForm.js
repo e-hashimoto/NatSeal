@@ -31,7 +31,8 @@ const CreateLocationForm = () => {
 
         const payload = {
             // id,
-            name,
+            user_id: user?.id,
+            name: name,
             latitude: +latitude,
             longitude: +longitude,
             description,
@@ -39,11 +40,11 @@ const CreateLocationForm = () => {
         };
 
         if (name.length === 0) errors.push("Please provide a name for this location.");
-        if (name.length > 100) errors.push("Please keep the length of th name of the location no more than 100 characters.")
+        if (name.length > 100) errors.push("Please keep the length of the name of the location no more than 100 characters.")
         if (latitude.length === 0) errors.push("Please provide the latitude of the location.")
         // Make sure latitude and longitude are not text.
-        if (!latitude.isInteger) errors.push("Please submit an integer or decimal for the location's latitude.")
-        if (!longitude.isInteger) errors.push("Please submit an integer or decimal for the location's longitude.")
+        // if (!latitude.isInteger) errors.push("Please submit an integer or decimal for the location's latitude.")
+        // if (!longitude.isInteger) errors.push("Please submit an integer or decimal for the location's longitude.")
         if (longitude.length === 0) errors.push("Please provide the longitude of the location.")
         if (description.length === 0) errors.push("Please provide a description for this location.")
         if (!image_url.includes('.jpg' || '.jpeg' || '.png')) errors.push("Please provide a picture for this location.")
@@ -52,6 +53,8 @@ const CreateLocationForm = () => {
             setValidationErrors(errors);
             return;
         }
+
+        if (!user) return <Redirect to="/login" />;
 
         let createdLocation = await dispatch(addNewLocation(payload));
         if (createdLocation) {
@@ -68,59 +71,75 @@ const CreateLocationForm = () => {
             <h1>Tell us about a new location!</h1>
             <h2 className="required-message">All fields are required!</h2>
             <form className="create-location-form" onSubmit={handleSubmit}>
-                <ul>
-                    {validationErrors.map((error, idx) => (
-                        <li className="errors-create-location" key={idx}>
-                            {error}
-                        </li>
-                    ))}
-                </ul>
-                <input
-                    type="string"
-                    placeholder="Name"
-                    required
-                    value={name}
-                    onChange={updateName}
-                    className="name-of-location"
-                />
-                <input
-                    type="number"
-                    placeholder="Latitude"
-                    className="latitude-for-location"
-                    required
-                    value={latitude}
-                    onChange={updateLatitude}
-                />
-                <input
-                    type="number"
-                    placeholder="Longitude"
-                    className="longitude-for-location"
-                    required
-                    value={longitude}
-                    onChange={updateLongitude}
-                />
-                <textarea
-                    className="description-textarea"
-                    rows="10"
-                    placeholder="Description"
-                    required
-                    value={description}
-                    onChange={updateDescription}
-                />
-                <input
-                    className="img-submission"
-                    type="file"
-                    accept=".jpg, .jpeg, .png"
-                    required
-                    value={image_url}
-                    onChange={updateImage_url}
-                />
-                <button className="submit-location" type="submit">
-                    Submit
-                </button>
-                <button type="button" onClick={handleCancelClick}>
-                    Cancel
-                </button>
+                <div>
+                    <ul>
+                        {validationErrors.map((error, idx) => (
+                            <li className="errors-create-location" key={idx}>
+                                {error}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div className="name-of-location-div">
+                    <input
+                        type="string"
+                        placeholder="Name"
+                        required
+                        value={name}
+                        onChange={updateName}
+                        className="name-of-location"
+                    />
+                </div>
+                <div>
+                    <input
+                        type="number"
+                        placeholder="Latitude"
+                        className="latitude-for-location"
+                        required
+                        value={latitude}
+                        onChange={updateLatitude}
+                    />
+                </div>
+                <div>
+                    <input
+                        type="number"
+                        placeholder="Longitude"
+                        className="longitude-for-location"
+                        required
+                        value={longitude}
+                        onChange={updateLongitude}
+                    />
+                </div>
+                <div>
+                    <textarea
+                        className="description-textarea"
+                        rows="10"
+                        placeholder="Description"
+                        required
+                        value={description}
+                        onChange={updateDescription}
+                    />
+                </div>
+                <div>
+                    <input
+                        className="img-submission"
+                        type="file"
+                        accept=".jpg, .jpeg, .png"
+                        required
+                        value={image_url}
+                        onChange={updateImage_url}
+                    />
+                </div>
+                <div>
+                    <button className="submit-location" type="submit" onClick={handleSubmit}>
+                        Submit
+                    </button>
+                </div>
+                <div>
+                    <button type="button" onClick={handleCancelClick}>
+                        Cancel
+                    </button>
+                </div>
             </form>
         </section>
     )
