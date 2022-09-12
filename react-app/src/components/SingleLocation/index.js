@@ -15,13 +15,13 @@ function SingleLocation() {
   const history = useHistory();
   const { id } = useParams();
   const location = useSelector((state) => state.locations[id]);
-  const [isLoaded, setLoaded] = useState(false);
+  const [isLoaded, setLoaded] = useState(true);
   const sessionUser = useSelector((state) => state.session.user);
   const account = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(getSingleLocation(id))
-        .then(() => setLoaded(true));
+        // .then(() => setLoaded(true));
   }, [id, dispatch]);
 
   const deleteTheLocation = (id) => {
