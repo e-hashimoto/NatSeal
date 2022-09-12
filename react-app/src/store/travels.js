@@ -31,7 +31,7 @@ const removeTravel = (travel) => ({
 
 // GET ALL TRAVELS
 export const getAllTravels = () => async (dispatch) => {
-    const res = await fetch("/api/travels");
+    const res = await fetch("/api/travels/");
 
     if (res.ok) {
         const data = await res.json();
@@ -41,7 +41,7 @@ export const getAllTravels = () => async (dispatch) => {
 
 // GET ONE TRAVEL
 export const getSingleTravel = (id) => async (dispatch) => {
-    const res = await fetch(`/api/travels/${id}`);
+    const res = await fetch(`/api/travels/${id}/`);
 
     if (res.ok) {
         const data = await res.json();
@@ -60,7 +60,7 @@ export const addNewTravel = (travel) => async (dispatch) => {
     form.append("location_id", location_id);
     form.append("description", description);
     form.append("image_url", image_url);
-    const res = await fetch("/api/travels", {
+    const res = await fetch("/api/travels/", {
         method: "POST",
         body: form,
     });
@@ -75,7 +75,7 @@ export const addNewTravel = (travel) => async (dispatch) => {
 // EDIT TRAVEL (PUT)
 export const editSingleTravel = (travel) => async (dispatch) => {
     const { user_id, location_id, description, image_url, id } = travel;
-    const res = await fetch(`/api/travels/${id}/edit`, {
+    const res = await fetch(`/api/travels/${id}/edit/`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id, location_id, description, image_url })
@@ -89,7 +89,7 @@ export const editSingleTravel = (travel) => async (dispatch) => {
 
 // DELETE TRAVEL
 export const deleteATravel = (id) => async (dispatch) => {
-    const res = await fetch(`/api/travels/${id}`, {
+    const res = await fetch(`/api/travels/${id}/`, {
         method: "DELETE",
     });
     if (res.ok) {
