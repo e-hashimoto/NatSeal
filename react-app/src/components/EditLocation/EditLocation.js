@@ -102,4 +102,3 @@ function EditLocation({ setShowModal }) {
 
 export default EditLocation;
 
-// function EditLocation() {}
