@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { addNewTravel } from "../../store/travels";
+import { getAllLocations } from "../../store/locations";
 
 const CreateTravelForm = () => {
     const dispatch = useDispatch();
@@ -17,11 +18,14 @@ const CreateTravelForm = () => {
 
     const updateDescription = (e) => setDescription(e.target.value);
     const updateImage_url = (e) => setImage_url(e.target.value);
-    const updateLocation = (e) => setLocation(e.target.value);
+    const updateName = (e) => setName(e.target.value);
 
-    // useEffect(() => {
-    //     const locationArr = Object.values(sessions).filter((currentLocation) => )
-    // })
+    useEffect(() => {
+        dispatch(getAllLocations());
+    }, [dispatch]);
+
+    const locationsObject = useSelector((state) => state.locations);
+    const locations = Object.values(locationsObject);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -76,28 +80,52 @@ const CreateTravelForm = () => {
                 {/* <select className="location-selector" value={location} onChange={updateLocation}
                     {}
                 /> */}
-                <textarea
-                    type="string"
-                    required
-                    placeholder="Description"
-                    rows="7"
-                    value={description}
-                    onChange={updateDescription}
-                />
-                <input
-                    className="img-submission-travel"
-                    type="file"
-                    accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG"
-                    required
-                    value={image_url}
-                    onChange={updateImage_url}
-                />
-                <button className="submit-travel" type="submit">
-                    Submit
-                </button>
-                <button type="button" onClick={handleCancelClick}>
-                    Cancel
-                </button>
+                <div>
+                    <input
+                        type="string"
+                        required
+                        placeholder="Name"
+                        value={name}
+                        onChange={updateName}
+                    />
+                </div>
+                <div>
+                    <select name="locations" id="current-available-locations" form="location-form">
+                        {locations.map((location) => (
+                            <option value={location.name}>{location.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <textarea
+                        type="string"
+                        required
+                        placeholder="Description"
+                        rows="7"
+                        value={description}
+                        onChange={updateDescription}
+                    />
+                </div>
+                <div>
+                    <input
+                        className="img-submission-travel"
+                        type="file"
+                        accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG"
+                        required
+                        value={image_url}
+                        onChange={updateImage_url}
+                    />
+                </div>
+                <div>
+                    <button className="submit-travel" type="submit" onClick={handleSubmit}>
+                        Submit
+                    </button>
+                </div>
+                <div>
+                    <button type="button" onClick={handleCancelClick}>
+                        Cancel
+                    </button>
+                </div>
             </form>
         </section>
     )

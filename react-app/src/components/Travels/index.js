@@ -23,6 +23,10 @@ const Travels = () => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        dispatch(getAllTravels());
+    }, [dispatch]);
+
     const handleClick = (id) => {
         dispatch(getSingleTravel(id));
     };

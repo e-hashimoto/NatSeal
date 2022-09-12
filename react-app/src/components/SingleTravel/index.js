@@ -7,6 +7,7 @@ import {
 } from "../../store/travels";
 import { useParams, useHistory } from "react-router-dom";
 import "./index.css";
+import EditTravelModal from "../EditTravel/EditTravel";
 
 function SingleTravel() {
   const dispatch = useDispatch();
