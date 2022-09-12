@@ -17,4 +17,4 @@ function EditLocationModal() {
     )
 }
 
-export default EditLocationModal
+export default EditLocationModal;

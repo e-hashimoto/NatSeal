@@ -5,9 +5,10 @@ import {
   deleteALocation,
   editSingleLocation,
 } from "../../store/locations";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import "./index.css";
-import EditLocation from "../EditLocation/EditLocation";
+// import EditLocation from "../EditLocation/EditLocation";
+import EditLocationModal from "../EditLocation";
 
 function SingleLocation() {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ function SingleLocation() {
   const { id } = useParams();
   const location = useSelector((state) => state.locations[id]);
   const [isLoaded, setLoaded] = useState(false);
+  const sessionUser = useSelector((state) => state.session.user);
+  const account = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(getSingleLocation(id))
@@ -22,11 +25,13 @@ function SingleLocation() {
   }, [id, dispatch]);
 
   const deleteTheLocation = (id) => {
-    dispatch(deleteTheLocation(id));
+    dispatch(deleteALocation(id));
     history.push(`/locations`);
   };
 
   if (!location) return null;
+
+  if (!sessionUser) return <Redirect to="/login" />;
 
   return (
     isLoaded && (
@@ -50,7 +55,24 @@ function SingleLocation() {
             {location.description}
           </div>
         </div>
-        <div>{}</div>
+        <div>
+            {location?.user_id === account?.id ? (
+                <>
+                    <div>
+                        <EditLocationModal />
+                    </div>
+                    <button
+                        className="single-location-delete-button"
+                        id="delete-button"
+                        onClick={deleteTheLocation}
+                    >
+                        Delete
+                    </button>
+                </>
+            ) : (
+                <></>
+            )}
+        </div>
       </div>
     )
   );

@@ -9,7 +9,7 @@ article_routes = Blueprint('articles', __name__)
 # EDIT AN ARTICLE
 
 @article_routes.route('/<int:id>/edit', methods=['PUT'])
-# @login_required
+@login_required
 def edit_article(id):
     article = Article.query.get(id)
     form = article_form.EditArticleForm()
@@ -23,7 +23,7 @@ def edit_article(id):
 # GET ALL ARTICLES
 
 @article_routes.route('/')
-# @login_required
+@login_required
 def get_all_articles():
     articles = Article.query.all()
     data = [article.to_dict() for article in articles]
@@ -32,7 +32,7 @@ def get_all_articles():
 # GET ONE ARTICLE
 
 @article_routes.route('/<int:id>')
-# @login_required
+@login_required
 def get_one_article(id):
     article = Article.query.get(id)
     return article.to_dict()
@@ -40,7 +40,7 @@ def get_one_article(id):
 # POST ONE ARTICLE
 
 @article_routes.route('/', methods=['POST'])
-# @login_required
+@login_required
 def post_article():
     form = article_form.ArticleForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -58,7 +58,7 @@ def post_article():
 # DELETE ONE ARTICLE
 
 @article_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_article(id):
     article = Article.query.get(id)
     db.session.delete(article)
