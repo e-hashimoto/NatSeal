@@ -45,9 +45,7 @@ def one_location(id):
 @login_required
 def create_location():
     form = location_form.LocationForm()
-    print(form, "++++++ This should be some data ")
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data, "++++ This should also be something")
     if form.validate_on_submit():
         location = Location(
             user_id=form.data['user_id'],
@@ -57,7 +55,6 @@ def create_location():
             description=form.data['description'],
             image_url=form.data['image_url']
         )
-        print(location, "this should be a new entry")
         db.session.add(location)
         db.session.commit()
         return location.to_dict()

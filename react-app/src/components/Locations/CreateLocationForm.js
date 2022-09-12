@@ -39,8 +39,6 @@ const CreateLocationForm = () => {
             image_url
         };
 
-        console.log(payload, "This should be info +++++++++++");
-
         if (name.length === 0) errors.push("Please provide a name for this location.");
         if (name.length > 100) errors.push("Please keep the length of the name of the location no more than 100 characters.")
         if (latitude.length === 0) errors.push("Please provide the latitude of the location.")

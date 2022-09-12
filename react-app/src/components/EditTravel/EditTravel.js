@@ -37,7 +37,7 @@ const EditTravel = ({ setShowModal }) => {
         };
         await dispatch(editSingleTravel(data));
         history.push(`/travels/${travel.id}`);
-        setShowModal(false);
+        // setShowModal(false);
     };
 
     if (!sessionUser) return <Redirect to="/signup" />;
@@ -72,6 +72,12 @@ const EditTravel = ({ setShowModal }) => {
                             required
                             value={}
                         /> */}
+                        <div>
+                            <button className="edit-button-travel" type="button" onClick={handleSubmit}>
+                                Submit
+                            </button>
+                        </div>
+
                     </form>
                 </div>
             </div>

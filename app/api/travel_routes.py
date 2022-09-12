@@ -46,7 +46,6 @@ def post_travel():
     form = travel_form.TravelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('THIS IS ME!!!!!!!', form)
         travel = Travel(
             user_id=form.data['user_id'],
             location_id=form.data['location_id'],
